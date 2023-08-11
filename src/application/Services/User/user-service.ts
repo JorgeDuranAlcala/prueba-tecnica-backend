@@ -3,7 +3,7 @@ import { IUserService } from "./IUserService";
 import { UserRepository } from "@src/infrastructure/userRepository/IUserRepo";
 import { ReturnUserDto } from "@src/domain/User/dtos/returnUser-dto";
 import { CreateUser } from "./Use-cases/CreateUser";
-import { GetAllUser } from './Use-cases/GetAllUsers'
+import { GetAllUser } from "./Use-cases/GetAllUsers";
 
 export class UserService implements IUserService {
   private readonly _userRepo: UserRepository;
@@ -20,8 +20,7 @@ export class UserService implements IUserService {
     return await CreateUser.create(this._userRepo).exec(createUserDto);
   }
 
-	async getAll(): Promise<ReturnUserDto[]> {
+  async getAll(): Promise<ReturnUserDto[]> {
     return await GetAllUser.create(this._userRepo).exec();
   }
-
 }

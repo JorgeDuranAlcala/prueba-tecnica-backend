@@ -23,7 +23,7 @@ export class User extends Entity<UserProps> {
     return this.props.nombre;
   }
 
-	  public get segundo_nombre(): string {
+  public get segundo_nombre(): string {
     return this.props.segundo_nombre;
   }
 
@@ -39,8 +39,6 @@ export class User extends Entity<UserProps> {
     return this.props.fecha_de_nacimiento;
   }
 
-
-
   public get email(): string {
     return this.props.email;
   }
@@ -48,7 +46,6 @@ export class User extends Entity<UserProps> {
   public get telefono(): string {
     return this.props.telefono;
   }
-
 
   public getProps(): UserProps {
     return this.props;

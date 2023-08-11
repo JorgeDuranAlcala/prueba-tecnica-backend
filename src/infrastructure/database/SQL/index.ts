@@ -1,4 +1,4 @@
-import { User } from "@src/domain/User"
+import { User } from "@src/domain/User";
 import { UserModel } from "./models/user";
 import { UserProps } from "@src/domain/User/user-props";
 import { IDatabase } from "@src/infrastructure/database/IDatabase";
@@ -18,10 +18,9 @@ export class Collection<
   constructor() {}
 
   async insert(entity: User): Promise<User> {
-    const user = await (UserModel as any).create(entity.getProps())  
-    return User.create({...user.dataValues})
+    const user = await (UserModel as any).create(entity.getProps());
+    return User.create({ ...user.dataValues });
   }
-
 
   async findAll() {
     return await (UserModel as any).findAll();

@@ -10,14 +10,13 @@ export class InMemoryUserRepo implements UserRepository {
   }
 
   async create(props: UserProps): Promise<User> {
-		const user = User.create(props)
+    const user = User.create(props);
     const users = await this._database.users.insert(user);
-		return users
+    return users;
   }
 
   async findAll(): Promise<User[]> {
     const users = await this._database.users.findAll();
-		return users
+    return users;
   }
-
 }

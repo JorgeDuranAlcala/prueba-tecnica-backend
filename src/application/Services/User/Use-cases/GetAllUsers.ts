@@ -14,6 +14,6 @@ export class GetAllUser {
 
   async exec() {
     const users = await this._userRepo.findAll();
-    return [...users].map( user => ReturnUserDto.create(user.getProps()));
+    return [...users].map((user) => ReturnUserDto.create(user.getProps()));
   }
 }
