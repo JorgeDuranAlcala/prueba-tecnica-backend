@@ -1,8 +1,9 @@
-
-import { User } from "@src/domain/User";
+import { User } from "@src/domain/User"
+import { UserModel } from "./models/user";
 import { UserProps } from "@src/domain/User/user-props";
+import { IDatabase } from "@src/infrastructure/database/IDatabase";
 
-class Collection<
+export class Collection<
   T extends {
     id: string;
     updateProp: (props: Partial<Props>) => T;
@@ -10,25 +11,23 @@ class Collection<
   },
   Props
 > {
-  private data: T[] = [];
   // eslint-disable-next-line no-unused-vars
   //private updateFn: <U>(item: T, PropsToUpdate: Partial<U>) => T;
 
   // eslint-disable-next-line no-unused-vars
   constructor() {}
 
-  insert(entity: T): T {
-		// User.create(entity.getProps())
-    this.data.push(entity);
-    return entity as T;
+  async insert(entity: User): Promise<User> {
+    const user = await (UserModel as any).create(entity.getProps())  
+    return User.create({...user.dataValues})
   }
 
 
-  findAll() {
-    return this.data;
+  async findAll() {
+    return await (UserModel as any).findAll();
   }
 }
 
-export class InMemoryDatabase {
+export class SQLDatabase {
   users: Collection<User, UserProps> = new Collection();
 }

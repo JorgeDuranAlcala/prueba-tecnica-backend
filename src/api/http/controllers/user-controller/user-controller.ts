@@ -5,6 +5,8 @@ import { IUserService } from "@src/application/Services/User/IUserService";
 import { IValidator } from "@src/libs/Validator/IValidator";
 import { NextFunction, Request, Response } from "express";
 
+
+
 export class UserController extends BaseController implements IUserController {
   private readonly _userService: IUserService;
   private readonly _validator: IValidator;
@@ -16,20 +18,65 @@ export class UserController extends BaseController implements IUserController {
   }
 
 /**
+ * @swagger
+ * components:
+ *   schemas:
+ *     User:
+ *       type: object
+ *       properties:
+ *         nombre:
+ *           type: string
+ *           description: The user's name.
+ *           example: Jorge Duran
+ *         segundo_nombre:
+ *           type: string
+ *           description: The user's middle name.
+ *           example: Luis
+ *         apellido_paterno:
+ *           type: string
+ *           description: The user's paternal last name.
+ *           example: Duran
+ *         apellido_materno:
+ *           type: string
+ *           description: The user's maternal last name.
+ *           example: Alcala
+ *         fecha_de_nacimiento:
+ *           type: string
+ *           format: date
+ *           description: The user's date of birth.
+ *           example: "2001-06-20"
+ *         email:
+ *           type: string
+ *           format: email
+ *           description: The user's email address.
+ *           example: jorgeluis20.duran@gmail.com
+ *         telefono:
+ *            type: string
+ *            description: the user's phone number.
+ *            example: "+584267472629"
+ */
+
+/**
  * @openapi
  * /api/vbeta/users:
  *   post:
  *     description: Create a user
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/User'
  *     responses:
  *       200:
- *         description: OK
+ *          description: OK
+ *          content:application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/User'
+ *       422:
+ *         description: MALFORMEDATA
  *         content:application/json:
- *         schema: 
- *          type: Object
- *          properties:
- *            data: 
- *              type: Object
- *
+ *       
 */
 
   create = async (

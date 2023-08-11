@@ -1,43 +1,43 @@
 
-import { sequelize  } from '../sequelize.js'
+import { sequelize  } from '../sequelize'
 import {  Model, DataTypes } from 'sequelize'
 
 
 // user model initialization
 
-export class User extends Model {}
+export class UserModel extends Model {}
 
-User.init({
-  // Model attributes are defined here
-	id_usuario: {
-		type: DataTypes.INTEGER,
-		allowNull: false,
-		autoIncrement: true,
-		primaryKey: true
-	},
+UserModel.init({
   nombre: {
     type: DataTypes.STRING,
     allowNull: false
   },
-  apellido: {
+  segundo_nombre: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  apellido_paterno: {
     type: DataTypes.STRING,
     allowNull: false
   },
-  Cedula: {
+  apellido_materno: {
     type: DataTypes.STRING,
     allowNull: false
   },
-  password: {
+  fecha_de_nacimiento: {
     type: DataTypes.STRING,
     allowNull: false
   },
-  rol: {
-    type: DataTypes.ENUM('admin', 'user'),
-    allowNull: false
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false,
   },
+  telefono: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  }
 }, {
-  // Other model options go here
-  sequelize, // We need to pass the connection instance
-  modelName: 'users', // We need to choose the model name
+  sequelize, 
+  modelName: 'users_test_jorge_duran',
 	timestamps: false
 });

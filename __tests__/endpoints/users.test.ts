@@ -15,9 +15,9 @@ describe("users endpoints", () => {
     base_url = `/api/v${api_version}`;
   });
 
-  describe("/POST /login", () => {
+  describe("/POST /users", () => {
 
-    test("should login an admin", async () => {
+    test("should create a user", async () => {
 			const body = {
 				nombre: "Jorge",
 				segundo_nombre: "Luis",
@@ -27,10 +27,23 @@ describe("users endpoints", () => {
 				email: "jorgeluis20.duran@gmail.com",
 				telefono: "+584267472629",
 			}
-      const res = await request.post(`${base_url}/auth/login`).send(body);
+      const res = await request.post(`${base_url}/users`).send(body);
       expect(res.statusCode).toEqual(HTTP_STATUS_CODE.OK);
       expect(res.body).toBeDefined();
       expect(res.body.user.nombre).toEqual(body.nombre);
+    });
+
+    test("should throw an Error when wrong body is passed", async () => {
+			const body = {
+				nombre: "Jorge",
+				segundo_nombre: "Luis",
+				apellido_paterno: "Duran",
+				apellido_materno: "Alcala",
+				fecha_de_nacimiento: "20 junio 2001",
+				email: "jorgeluis20.duran@gmail.com",
+			}
+      const res = await request.post(`${base_url}/users`).send(body);
+      expect(res.statusCode).toEqual(HTTP_STATUS_CODE.MALFORMED_DATA);
     });
 
   });

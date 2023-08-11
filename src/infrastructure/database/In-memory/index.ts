@@ -1,5 +1,6 @@
 import { User } from "@src/domain/User";
 import { UserProps } from "@src/domain/User/user-props";
+import { IDatabase } from "@src/infrastructure/database/IDatabase";
 
 class Collection<
   T extends {
@@ -56,6 +57,6 @@ class Collection<
   }
 }
 
-export class InMemoryDatabase {
+export class InMemoryDatabase implements IDatabase {
   users: Collection<User, UserProps> = new Collection();
 }

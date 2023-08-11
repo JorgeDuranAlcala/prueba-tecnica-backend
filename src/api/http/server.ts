@@ -12,6 +12,8 @@ interface IApp {
   start(): void;
 }
 
+const importSwagger = async () => await import('./swagger');
+
 export class ExpressApp implements IApp {
   private readonly _app: Application;
   private readonly _router: HTTPRouter;
@@ -50,10 +52,13 @@ export class ExpressApp implements IApp {
     this._app.use(express.json({ limit: "5mb" }));
   }
 
-  private initRoutes(): void {
+  private async initRoutes(): Promise<void> {
     const router = this._router.get();
     this._app.use(`/api/v${this._app.get("api-version")}`, router);
-		 swaggerDocs(this._app, this._app.get('port') )
+    if (process.env.NODE_ENV === "dev") {
+      const sd = await importSwagger()
+      sd.swaggerDocs(this._app, this._app.get('port') )
+    }
     this._app.use("*", this._errorHandler.NOT_FOUND_ROUTE_HANDLER);
     if (process.env.NODE_ENV === "dev")
       this._app.use(this._errorHandler.logErrorMiddleware);

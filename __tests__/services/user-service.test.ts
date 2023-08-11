@@ -35,7 +35,7 @@ describe("User service", () => {
 		test("should create a user", async () => {
 			const userData = instanceToPlain(returnDto);
 			expect(userData.nombre).toBeDefined();
-			expect(userData.apellido_materno).toEqual(userData.apelldio_materno);
+			expect(userData.apellido_materno).toEqual(userData.apellido_materno);
 		});
 
 
