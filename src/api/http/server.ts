@@ -6,6 +6,9 @@ import { createServer } from "http";
 import { HTTPRouter } from "./router/router";
 import { swaggerDocs } from "./swagger";
 import dotenv from "dotenv";
+import cors from 'cors'
+import morgan from 'morgan'
+
 dotenv.config();
 
 interface IApp {
@@ -49,6 +52,8 @@ export class ExpressApp implements IApp {
   private middlewares(): void {
     this._app.use(Compression());
     this._app.use(helmet());
+    this._app.use(cors());
+    this._app.use(morgan('dev'));
     this._app.use(express.json({ limit: "5mb" }));
   }
 
