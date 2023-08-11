@@ -4,6 +4,7 @@ import Compression from "compression";
 import helmet from "helmet";
 import { createServer } from "http";
 import { HTTPRouter } from "./router/router";
+import { swaggerDocs } from './swagger' 
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -52,7 +53,7 @@ export class ExpressApp implements IApp {
   private initRoutes(): void {
     const router = this._router.get();
     this._app.use(`/api/v${this._app.get("api-version")}`, router);
-		// swaggerDocs(this._app, this._app.get('port') )
+		 swaggerDocs(this._app, this._app.get('port') )
     this._app.use("*", this._errorHandler.NOT_FOUND_ROUTE_HANDLER);
     if (process.env.NODE_ENV === "dev")
       this._app.use(this._errorHandler.logErrorMiddleware);
